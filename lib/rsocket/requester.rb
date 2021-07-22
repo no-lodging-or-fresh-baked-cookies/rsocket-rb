@@ -58,7 +58,7 @@ module RSocket
     end
 
     # @param error_frame [RSocket:ErrorFrame]
-    def error_handler(error_frame)
+    def handle_error(error_frame)
       err = error_frame.data.pack('C*')
       stream_id = error_frame.stream_id
       subject = @streams.delete(stream_id)

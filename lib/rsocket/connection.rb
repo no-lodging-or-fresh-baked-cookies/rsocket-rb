@@ -39,8 +39,8 @@ module RSocket
         when :PAYLOAD
           receive_response(frame)
         when :ERROR
-          if defined?(error_handler)
-            error_handler(frame)
+          if defined?(handle_error)
+            handle_error(frame)
           end
         when :CANCEL
           # cancel logic
