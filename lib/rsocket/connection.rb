@@ -36,8 +36,12 @@ module RSocket
           receive_setup(frame)
         when :REQUEST_RESPONSE, :REQUEST_FNF, :REQUEST_STREAM, :REQUEST_CHANNEL, :METADATA_PUSH
           receive_request(frame)
-        when :PAYLOAD, :ERROR
+        when :PAYLOAD
           receive_response(frame)
+        when :ERROR
+          if defined?(handle_error)
+            handle_error(frame)
+          end
         when :CANCEL
           # cancel logic
         when :REQUEST_N
