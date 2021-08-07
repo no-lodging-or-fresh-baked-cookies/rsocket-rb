@@ -88,6 +88,7 @@ module RSocket
         frame = MetadataPushFrame.new
       when :ERROR
         frame = ErrorFrame.new(stream_id)
+        frame.parse_header(buffer)
       else
         # type code here
       end
