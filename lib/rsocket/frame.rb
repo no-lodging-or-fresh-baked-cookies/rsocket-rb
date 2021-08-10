@@ -382,6 +382,19 @@ module RSocket
       @error_code = buffer.get_int32
     end
 
+    def error_type
+      return if @error_code.zero?
+
+      @error_type ||= ErrorType.constants.find { |const| ErrorType.const_get(const) == @error_code }
+    end
+
+    def to_s
+      message = data.pack("C*")
+      return message if error_type.nil?
+
+      "#{error_type}: #{message}"
+    end
+
     def serialize
       frame_length = 4 + 2 + 3 + @error_data.length
       bytes = Array.new(3 + frame_length)
