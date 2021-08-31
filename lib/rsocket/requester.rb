@@ -33,7 +33,7 @@ module RSocket
 
     end
 
-    def post_init
+    def ssl_handshake_completed
       setup_frame = SetupFrame.new(0)
       setup_frame.metadata_encoding = @metadata_encoding
       setup_frame.data_encoding = @data_encoding
